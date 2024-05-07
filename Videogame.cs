@@ -9,10 +9,10 @@ namespace adonet_db_videogame
     internal class Videogame
     {
 
-        private string Name { get; set; }
-        private string Overview { get; set; }
-        private DateTime Release {  get; set; }
-        private int Id_software { get; set; }
+        public string Name { get; set; }
+        public string Overview { get; set; }
+        public DateTime Release {  get; set; }
+        public int Id_software { get; set; }
 
         public Videogame(string name, string overview, DateTime release, int id)
         {

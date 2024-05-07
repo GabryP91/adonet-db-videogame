@@ -54,9 +54,11 @@ namespace adonet_db_videogame
 
                             int id = CheckIdSoftware("Inserisci id Software di riferimento: ", manager);
 
+                            Videogame gioco = new Videogame(name, overview, date, id);
+
                             try
                             {
-                                manager.InserisciVideogame(name,overview,date,id);
+                                manager.InserisciVideogame(gioco);
                                 Console.WriteLine("Videogioco inserito con successo.");
                             }
                             catch (ArgumentException ex)

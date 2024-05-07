@@ -16,7 +16,7 @@ namespace adonet_db_videogame
      
 
         //INSRIMENTO NUOVO VIDEOGIOCO
-        public void InserisciVideogame(string nome, string overview, DateTime release, int id)
+        public void InserisciVideogame(Videogame gioco)
         {
 
             using SqlConnection connessioneSql = new SqlConnection(STRINGA_DI_CONNESSIONE);
@@ -34,7 +34,7 @@ namespace adonet_db_videogame
                 using SqlCommand cmd = new SqlCommand(query, connessioneSql);
 
                 //chiamo funzione privata InsertInternal
-                InsertInternal(cmd, nome, overview, release,id);
+                InsertInternal(cmd, gioco.Name, gioco.Overview, gioco.Release,gioco.Id_software);
             }
             catch (Exception ex)
             { }
