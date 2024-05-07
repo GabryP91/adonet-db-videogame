@@ -104,7 +104,6 @@ namespace adonet_db_videogame
             }
         }
 
-
         static string CheckString(string message)
         {
             string input;
