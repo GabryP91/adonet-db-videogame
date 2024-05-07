@@ -66,47 +66,27 @@ namespace adonet_db_videogame
                             break;
                         case 2:
 
-                            int idVideogame = CheckIdGame("Inserisci l'ID del videogioco da cercare: ");
+                            int idVideogame = CheckIdGame("\nInserisci l'ID del videogioco da cercare: ");
 
                             manager.GetVideogameById(idVideogame);
 
                             break;
-                        /*case 3:
-                            Console.Write("Inserisci la stringa da cercare nel nome del videogioco: ");
-                            string searchTerm = Console.ReadLine();
-                            List<Videogame> foundByName = manager.GetVideogamesByName(searchTerm);
-                            if (foundByName.Count > 0)
-                            {
-                                Console.WriteLine($"Videogiochi trovati con il nome che contiene '{searchTerm}':");
-                                foreach (var vg in foundByName)
-                                {
-                                    Console.WriteLine($"ID: {vg.Id}, Nome: {vg.Name}");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Nessun videogioco trovato con il nome specificato.");
-                            }
+                        case 3:
+                            
+                            string searchTerm = CheckString("\n Inserisci una parola: ");
+
+                            manager.GetVideogamesByString(searchTerm);
+                            
                             break;
                         case 4:
-                            Console.Write("Inserisci l'ID del videogioco da cancellare: ");
-                            if (int.TryParse(Console.ReadLine(), out int idToDelete))
-                            {
-                                try
-                                {
-                                    manager.CancellaVideogame(idToDelete);
-                                    Console.WriteLine("Videogioco cancellato con successo.");
-                                }
-                                catch (ArgumentException ex)
-                                {
-                                    Console.WriteLine($"Errore: {ex.Message}");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("ID non valido.");
-                            }
-                            break;*/
+
+                            int idVideogameDel = CheckIdGame("\nInserisci l'ID del videogioco da cancellare: ");
+
+                            manager.DelVideogame(idVideogameDel);
+
+                            Console.WriteLine("Cancellazione avvenuta con successo.");
+
+                            break;
                         case 5:
                             running = false;
                             break;

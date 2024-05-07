@@ -58,7 +58,6 @@ namespace adonet_db_videogame
         }
 
         //RICERCA GIOCO PER ID
-
         public void GetVideogameById (int id)
         {
             using SqlConnection connessioneSql = new SqlConnection(STRINGA_DI_CONNESSIONE);
@@ -101,6 +100,70 @@ namespace adonet_db_videogame
             catch (Exception ex)
             { }
 
+        }
+
+        public void GetVideogamesByString(string word)
+        {
+            using SqlConnection connessioneSql = new SqlConnection(STRINGA_DI_CONNESSIONE);
+
+            try
+            {
+                //apro connessione db
+                connessioneSql.Open();
+
+                //creo la query per l'inserimento dei dati
+                string query = @"select name as Nome_Gioco, overview as descrizione, release_date as Periodo_rilascio from videogames where name LIKE '%' + @word + '%'";
+
+                // Creo un oggetto SqlCommand con la query e la connessione
+                using SqlCommand cmd = new SqlCommand(query, connessioneSql);
+
+                // aggiungo il valore passato alla mia query
+                cmd.Parameters.Add(new SqlParameter("@word", word));
+
+                // Eseguo il comando e ottengo un SqlDataReader per leggere i risultati
+                using SqlDataReader reader = cmd.ExecuteReader();
+
+
+                // Controllo se ci sono righe restituite
+                if (reader.HasRows)
+                {
+                    // Leggo i risultati e li stampo a console
+                    while (reader.Read())
+                    {
+                        Console.WriteLine($"\nNome: {reader["Nome_Gioco"]},\nDescrizione: {reader["descrizione"]},\nData di rilascio: {reader["Periodo_rilascio"]}");
+                    }
+                }
+
+                else
+                {
+                    // Se non ci sono risultati, informo l'utente che l'ID specificato non esiste
+                    Console.WriteLine("Nessun videogioco trovato con l'ID specificato.");
+                }
+
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        //CANCELLAZIONE VIDEOGAME
+        public void DelVideogame(int id)
+        {
+            using SqlConnection connessioneSql = new SqlConnection(STRINGA_DI_CONNESSIONE);
+
+            try
+            {
+                connessioneSql.Open();
+                string query = @"DELETE FROM videogames WHERE id=@id;";
+
+                using SqlCommand cmd = new SqlCommand(query, connessioneSql);
+
+                cmd.Parameters.Add(new SqlParameter("@id", id));
+
+                int affectedRows = cmd.ExecuteNonQuery();
+            }
+
+            catch (Exception ex)
+            { }
         }
 
         //VISUALIZZAZIONE LISTA SOFTWARE HOUSE
